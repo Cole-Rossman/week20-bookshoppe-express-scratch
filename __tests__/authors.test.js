@@ -47,7 +47,6 @@ describe('authors routes', () => {
 
     // { body: rick } destructuring body and renaming it rick. A little trick
     const { body: rick } = await request(app).get(`/authors/${resp.body.id}`);
-    console.log('rick', rick);
     expect(rick.books.length).toBe(2);
   });
 

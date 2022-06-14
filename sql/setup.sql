@@ -32,8 +32,8 @@ INSERT INTO authors (
 )
 VALUES
   ('Ernest Hemingway', '07-21-1899', 'Oak Park, IL'),
-  ('Stephen King', '09-21-1947', 'Portland, ME'),
   ('Stephenie Meyer', '12-24-1973', 'Hartford, CT');
+  ('Stephen King', '09-21-1947', 'Portland, ME'),
 
 INSERT INTO books (
     title,

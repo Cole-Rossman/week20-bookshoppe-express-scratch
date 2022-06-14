@@ -44,8 +44,10 @@ VALUES
   ('A Farewell to Arms', '1929'),
   ('Twilight', '2005'),
   ('It', '1986'),
-  ('The Shining', '1977');
-
+  ('The Shining', '1977'),
+  ('The Lightning Thief', '2005'),
+  ('The Sea of Monsters', '2006');
+--   add rick books
   INSERT INTO authors_books(
       author_id,
       book_id

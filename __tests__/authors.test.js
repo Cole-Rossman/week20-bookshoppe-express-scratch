@@ -32,11 +32,24 @@ describe('authors routes', () => {
     expect(ernest.books[0]).toHaveProperty('id');
   });
 
-  it('POST /authors should create a new author', async () => {
-    const resp = await request(app).post('/authors').send({ author_name: 'Louis Sachar' });
+  // it('POST /authors should create a new author', async () => {
+  //   const resp = await request(app).post('/authors').send({ author_name: 'Louis Sachar' });
+  //   expect(resp.status).toBe(200);
+  //   expect(resp.body.author_name).toBe('Louis Sachar');
+  // });
+
+  it('POST /authors should create a new author with an associated book', async () => {
+    const resp = await request(app)
+      .post('/authors')
+      .send({ author_name: 'Rick Riordan', dob: '06-05-1964', pob: 'San Antonio, TX', bookIds: [6, 7] });
     expect(resp.status).toBe(200);
-    expect(resp.body.author_name).toBe('Louis Sachar');
+    expect(resp.body.author_name).toBe('Rick Riordan');
+
+    // { body: rick } destructuring body and renaming it rick. A little trick
+    const { body: rick } = await request(app).get(`/authors/${resp.body.id}`);
+    expect(rick.books.length).toBe(2);
   });
+
 
   afterAll(() => {
     pool.end();

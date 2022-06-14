@@ -8,28 +8,22 @@ describe('authors routes', () => {
     return setup(pool);
   });
 
-  it.skip('/authors/ should return a list of authors', async () => {
+  it('/authors/ should return a list of authors', async () => {
     const resp = await request(app).get('/authors');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual([
-      { id: '1', name: 'Ernest Hemingway' },
-      { id: '2', name: 'Stephen King' },
-      { id: '3', name: 'Stephenie Meyer' },
+      { id: '1', author_name: 'Ernest Hemingway' },
+      { id: '2', author_name: 'Stephenie Meyer' },
+      { id: '3', author_name: 'Stephen King' },
     ]);
   });
 
-  it.skip('/authors/:id should return a list of authors with nested books', async () => {
-    const res = await request(app).get('/authors/1');
-    expect(res.body.length).toEqual(3);
-    const ernest = res.body.find((author) => author.id === '1');
-    expect(ernest).toHaveProperty('author_name', 'Ernest Hemingway');
-    expect(ernest).toHaveProperty('dob', '07-21-1899');
-    expect(ernest).toHaveProperty('pob', 'Oak Park, IL');
-    expect(ernest).toHaveProperty('books');
-    expect(ernest.books[0]).toHaveProperty('title');
-    expect(ernest.books[0]).toHaveProperty('released');
-    expect(ernest.books[0]).toHaveProperty('book_id');
-    expect(ernest.books[0]).toHaveProperty('id');
+  it('/authors/:id should return a list of authors with nested books', async () => {
+    const resp = await request(app).get('/authors/1');
+    expect(resp.status).toBe(200);
+    expect(resp.body.id).toEqual('1');
+    expect(resp.body.author_name).toEqual('Ernest Hemingway');
+    expect(resp.body).toHaveProperty('books');
   });
 
   // it('POST /authors should create a new author', async () => {

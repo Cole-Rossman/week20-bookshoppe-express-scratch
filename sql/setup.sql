@@ -2,7 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS authors CASCADE;
 DROP TABLE IF EXISTS books CASCADE;
-DROP TABLE IF EXISTS authors_books CASCADE;
+DROP TABLE IF EXISTS authors_books;
 
 CREATE TABLE authors (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -32,8 +32,8 @@ INSERT INTO authors (
 )
 VALUES
   ('Ernest Hemingway', '07-21-1899', 'Oak Park, IL'),
-  ('Stephenie Meyer', '12-24-1973', 'Hartford, CT');
-  ('Stephen King', '09-21-1947', 'Portland, ME'),
+  ('Stephenie Meyer', '12-24-1973', 'Hartford, CT'),
+  ('Stephen King', '09-21-1947', 'Portland, ME');
 
 INSERT INTO books (
     title,

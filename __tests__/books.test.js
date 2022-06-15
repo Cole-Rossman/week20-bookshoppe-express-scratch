@@ -23,21 +23,17 @@ describe('books routes', () => {
   });
 
   it.skip('/books/:id should return a list of books with nested authors', async () => {
-    const res = await request(app).get('/books/3');
-    expect(res.body.length).toEqual(5);
-    const twilight = res.body.find((book) => book.id === '3');
-    expect(twilight).toHaveProperty('title', 'Twilight');
-    expect(twilight).toHaveProperty('released', '2005');
-    expect(twilight).toHaveProperty('authors');
-    expect(twilight.authors[0]).toHaveProperty('author_name');
-    expect(twilight.authors[0]).toHaveProperty('author_id');
-    expect(twilight.authors[0]).toHaveProperty('id');
+    const resp = await request(app).get('/books/3');
+    expect(resp.status).toBe(200);
+    expect(resp.body.id).toEqual('3');
+    expect(resp.body.title).toEqual('Twilight');
+    expect(resp.body).toHaveProperty('authors');
   });
 
   it.skip('POST /books should create a new book with an associated author', async () => {
     const resp = await request(app)
       .post('/books')
-      .send({ title: 'New Moon', released: '2006', AuthorIds: [2] });
+      .send({ title: 'New Moon', released: '2006', authorIds: [2] });
     expect(resp.status).toBe(200);
     expect(resp.body.title).toBe('New Moon');
 

@@ -30,7 +30,7 @@ describe('books routes', () => {
     expect(resp.body).toHaveProperty('authors');
   });
 
-  it.skip('POST /books should create a new book with an associated author', async () => {
+  it('POST /books should create a new book with an associated author', async () => {
     const resp = await request(app)
       .post('/books')
       .send({ title: 'New Moon', released: '2006', authorIds: ['2'] });

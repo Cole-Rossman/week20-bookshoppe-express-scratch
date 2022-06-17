@@ -14,7 +14,7 @@ CREATE TABLE authors (
 CREATE TABLE books (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR,
-    released INT
+    released VARCHAR
 );
 
 CREATE TABLE authors_books (
@@ -47,7 +47,7 @@ VALUES
   ('The Shining', '1977'),
   ('The Lightning Thief', '2005'),
   ('The Sea of Monsters', '2006');
---   add rick books
+
   INSERT INTO authors_books(
       author_id,
       book_id

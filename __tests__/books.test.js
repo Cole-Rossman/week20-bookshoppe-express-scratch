@@ -8,8 +8,8 @@ describe('books routes', () => {
     return setup(pool);
   });
 
-  it('/books/ should return a list of books', async () => {
-    const resp = await request(app).get('/books');
+  it('/api/v1/books/ should return a list of books', async () => {
+    const resp = await request(app).get('/api/v1/books');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual([
       { id: '1', title: 'The Old Man and the Sea', released: '1952' },
@@ -22,8 +22,8 @@ describe('books routes', () => {
     ]);
   });
 
-  it('/books/:id should return a list of books with nested authors', async () => {
-    const resp = await request(app).get('/books/3');
+  it('/api/v1/books/:id should return a list of books with nested authors', async () => {
+    const resp = await request(app).get('/api/v1/books/3');
     expect(resp.status).toBe(200);
     expect(resp.body.id).toEqual('3');
     expect(resp.body.title).toEqual('Twilight');
@@ -32,13 +32,13 @@ describe('books routes', () => {
 
   it('POST /books should create a new book with an associated author', async () => {
     const resp = await request(app)
-      .post('/books')
+      .post('/api/v1/books')
       .send({ title: 'New Moon', released: '2006', authorIds: ['2'] });
     expect(resp.status).toBe(200);
     expect(resp.body.title).toBe('New Moon');
 
     // { body: new_moon } destructuring body and renaming it new_moon. A little trick
-    const { body: new_moon } = await request(app).get(`/books/${resp.body.id}`); 
+    const { body: new_moon } = await request(app).get(`/api/v1/books/${resp.body.id}`); 
     expect(new_moon.authors.length).toBe(1);
   });
 

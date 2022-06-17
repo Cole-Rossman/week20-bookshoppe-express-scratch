@@ -8,8 +8,8 @@ describe('authors routes', () => {
     return setup(pool);
   });
 
-  it('/authors/ should return a list of authors', async () => {
-    const resp = await request(app).get('/authors');
+  it('/api/v1/authors/ should return a list of authors', async () => {
+    const resp = await request(app).get('/api/v1/authors');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual([
       { id: '1', author_name: 'Ernest Hemingway' },
@@ -18,8 +18,8 @@ describe('authors routes', () => {
     ]);
   });
 
-  it('/authors/:id should return a list of authors with nested books', async () => {
-    const resp = await request(app).get('/authors/1');
+  it('/api/v1/authors/:id should return a list of authors with nested books', async () => {
+    const resp = await request(app).get('/api/v1/authors/1');
     expect(resp.status).toBe(200);
     expect(resp.body.id).toEqual('1');
     expect(resp.body.author_name).toEqual('Ernest Hemingway');
@@ -34,13 +34,13 @@ describe('authors routes', () => {
 
   it('POST /authors should create a new author with an associated book', async () => {
     const resp = await request(app)
-      .post('/authors')
+      .post('/api/v1/authors')
       .send({ author_name: 'Rick Riordan', dob: '06-05-1964', pob: 'San Antonio, TX', bookIds: [6, 7] });
     expect(resp.status).toBe(200);
     expect(resp.body.author_name).toBe('Rick Riordan');
 
     // { body: rick } destructuring body and renaming it rick. A little trick
-    const { body: rick } = await request(app).get(`/authors/${resp.body.id}`);
+    const { body: rick } = await request(app).get(`/api/v1/authors/${resp.body.id}`);
     expect(rick.books.length).toBe(2);
   });
 

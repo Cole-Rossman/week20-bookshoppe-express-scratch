@@ -22,7 +22,7 @@ describe('books routes', () => {
     ]);
   });
 
-  it.skip('/books/:id should return a list of books with nested authors', async () => {
+  it('/books/:id should return a list of books with nested authors', async () => {
     const resp = await request(app).get('/books/3');
     expect(resp.status).toBe(200);
     expect(resp.body.id).toEqual('3');
@@ -38,8 +38,7 @@ describe('books routes', () => {
     expect(resp.body.title).toBe('New Moon');
 
     // { body: new_moon } destructuring body and renaming it new_moon. A little trick
-    const { body: new_moon } = await request(app).get(`/books/${resp.body.id}`);
-    console.log('new_moon', new_moon); 
+    const { body: new_moon } = await request(app).get(`/books/${resp.body.id}`); 
     expect(new_moon.authors.length).toBe(1);
   });
 
